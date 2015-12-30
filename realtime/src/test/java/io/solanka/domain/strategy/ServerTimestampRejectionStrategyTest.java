@@ -38,5 +38,8 @@ public class ServerTimestampRejectionStrategyTest {
     public void shouldReject() {
         long timestamp = System.currentTimeMillis() - duration.toMillis() - 1L;
         assertFalse(strategy.accept(timestamp));
+
+        timestamp = System.currentTimeMillis() + duration.toMillis() + 1L;
+        assertFalse(strategy.accept(timestamp));
     }
 }

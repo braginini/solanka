@@ -3,23 +3,20 @@ package io.solanka.domain.strategy;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-public class SimpleRejectionStrategyTest {
+public class ServerTimestampRejectionStrategyTest {
 
-    long threshold;
-    TimeUnit timeUnit;
+    Duration duration = Duration.ofMillis(100L);
 
-    SimpleRejectionStrategy strategy;
+    ServerTimestampRejectionStrategy strategy;
 
     @BeforeClass
     public void setUp() {
-        threshold = 100L;
-        timeUnit= TimeUnit.MILLISECONDS;
-        strategy = new SimpleRejectionStrategy(threshold, timeUnit);
+        strategy = new ServerTimestampRejectionStrategy(duration);
     }
 
 
@@ -29,7 +26,6 @@ public class SimpleRejectionStrategyTest {
      */
     @Test
     public void shouldAccept() {
-
         long timestamp = System.currentTimeMillis();
         assertTrue(strategy.accept(timestamp));
     }
@@ -40,7 +36,7 @@ public class SimpleRejectionStrategyTest {
      */
     @Test
     public void shouldReject() {
-        long timestamp = System.currentTimeMillis() - timeUnit.toMillis(threshold) - 1L;
+        long timestamp = System.currentTimeMillis() - duration.toMillis() - 1L;
         assertFalse(strategy.accept(timestamp));
     }
 }

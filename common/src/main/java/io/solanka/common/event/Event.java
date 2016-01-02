@@ -1,4 +1,4 @@
-package io.solanka.domain.event;
+package io.solanka.common.event;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -44,6 +44,6 @@ public interface Event {
      * @param dimension the dimension
      * @return thew {@link List} of all dimension values represented as strings
      */
-    Object getDimension(String dimension);
+    String getDimension(String dimension);
 
 }

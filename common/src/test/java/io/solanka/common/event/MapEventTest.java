@@ -1,5 +1,6 @@
-package io.solanka.domain.event;
+package io.solanka.common.event;
 
+import io.solanka.common.event.MapEvent;
 import org.testng.annotations.Test;
 
 import java.time.ZonedDateTime;
@@ -31,12 +32,12 @@ public class MapEventTest {
 
         MapEvent event = new MapEvent(ZonedDateTime.now(), body, supplier.get().collect(Collectors.toList()));
         //when null value
-        //then empty list
+        //then empty String
         assertTrue(event.getDimension("dim_null").isEmpty());
 
-        //when not null and single value
-        //then size = 1
-        assertTrue(event.getDimension("dim_2").size() == 1);
+        //when not null value
+        //then it is equal to input
+        assertEquals(event.getDimension("dim_2"), "dim_2");
 
         //when 3 dims
         //then dim list is size of 3

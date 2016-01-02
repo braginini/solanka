@@ -1,8 +1,7 @@
-package io.solanka.domain.event;
+package io.solanka.common.event;
 
 import java.time.ZonedDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * An {@link Event} interface implementation backed by {@link java.util.Map}.
@@ -46,18 +45,13 @@ public class MapEvent implements Event {
     }
 
     @Override
-    public List<String> getDimension(String dimension) {
+    public String getDimension(String dimension) {
 
         final Object value = body.get(dimension);
         if (value == null) {
-            return Collections.emptyList();
-        } else if (value instanceof List) {
-            return (List<String>) ((List) value)
-                    .stream()
-                    .map(String::valueOf)
-                    .collect(Collectors.toList());
+            return "";
         } else {
-            return Collections.singletonList(String.valueOf(value));
+            return String.valueOf(value);
         }
     }
 }

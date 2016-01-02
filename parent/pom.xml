@@ -22,6 +22,11 @@
                 <artifactId>testng</artifactId>
                 <version>${dependency.testng.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.solanka</groupId>
+                <artifactId>solanka-common</artifactId>
+                <version>${version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
